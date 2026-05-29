@@ -1,3 +1,23 @@
 # golf-scorekeeper
-Read me file will be updated as building this app progresses.
-I hope to make a clean easy to use free app to keep score on the course and keep a history so I cansee improvement in my score.
+
+A simple golf scoring application designed for casual and league play.
+
+## Features
+
+- Track multiple golfers
+- 9-hole support
+- 18-hole support
+- Multiple courses
+- Live score entry
+- Running totals
+
+## Planned Features
+
+- Handicap tracking
+- Statistics
+- GPS integration
+- Tournament mode
+
+## Version
+
+1.0.0
