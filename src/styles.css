@@ -1,0 +1,154 @@
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #eef2ed;
+    color: #1f2937;
+}
+
+.container {
+    padding: 16px;
+    max-width: 900px;
+    margin: auto;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.card {
+    background: white;
+    border-radius: 18px;
+    padding: 18px;
+    margin-bottom: 16px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+}
+
+.player-name {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 14px;
+}
+
+.score-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+}
+
+.score-btn {
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
+    border: none;
+    font-size: 32px;
+    font-weight: bold;
+    background: #1f6f43;
+    color: white;
+}
+
+.score-btn:active {
+    transform: scale(0.96);
+}
+
+.score-display {
+    font-size: 42px;
+    font-weight: bold;
+    width: 80px;
+    text-align: center;
+}
+
+.total {
+    margin-top: 14px;
+    text-align: center;
+    font-size: 18px;
+}
+
+.green {
+    color: #15803d;
+}
+
+.orange {
+    color: #ea580c;
+}
+
+.red {
+    color: #dc2626;
+}
+
+button {
+    cursor: pointer;
+}
+
+.primary {
+    background: #1f6f43;
+    color: white;
+    border: none;
+    border-radius: 14px;
+    padding: 14px;
+    width: 100%;
+    font-size: 18px;
+}
+
+.nav-row {
+    display: flex;
+    justify-content: space-between;
+    margin: 18px 0;
+}
+
+.nav-btn {
+    flex: 1;
+    margin: 0 6px;
+    background: white;
+    border: none;
+    border-radius: 14px;
+    padding: 14px;
+    font-size: 18px;
+}
+
+.scorecard {
+    overflow-x: auto;
+    margin-top: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+th {
+    background: #1f6f43;
+    color: white;
+    padding: 10px;
+}
+
+td {
+    text-align: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.expand-btn {
+    width: 100%;
+    background: #dfe7dc;
+    border: none;
+    padding: 14px;
+    border-radius: 14px;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 10px;
+    border-radius: 12px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
