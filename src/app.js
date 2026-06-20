@@ -426,10 +426,9 @@ function render() {
 
                     <h3>Players</h3>
 
-                    ${state.players.map((player, i) => `
+${state.players.map((player, i) => `
 
-                        <input
-                            <div style="
+<div style="
     display:flex;
     gap:8px;
     margin-bottom:10px;
@@ -451,15 +450,10 @@ function render() {
     </button>
 
 </div>
-                            onchange="
-                                state.players[${i}] = this.value;
-                                save();
-                            "
-                        >
 
-                    `).join("")}
+`).join("")}
 
-                    <button
+<button
                         class="expand-btn"
                         onclick="
                             state.players.push('Player');
