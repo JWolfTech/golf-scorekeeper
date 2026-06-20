@@ -237,6 +237,13 @@ function totalPar() {
 
 function totalVsPar(playerIndex) {
 
+    const playedAnyHole =
+        state.scores[playerIndex].some(score => score > 0);
+
+    if (!playedAnyHole) {
+        return "";
+    }
+
     let diff = total(playerIndex) - totalPar();
 
     if (diff === 0) {
@@ -547,15 +554,10 @@ ${state.players.map((player, i) => `
 
                             </div>
 
-                            <div class="total">
-
-                                Total:
-                                ${total(i)}
-
-                                (${totalVsPar(i)})
-
-                            </div>
-
+ <div class="total">
+    Total: ${total(i)}
+    ${totalVsPar(i) ? `(${totalVsPar(i)})` : ""}
+</div>
                         </div>
                     `;
 
