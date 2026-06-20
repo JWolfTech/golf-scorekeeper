@@ -235,6 +235,16 @@ function totalPar() {
         .reduce((a, b) => a + b, 0);
 }
 
+function playedPar() {
+
+    if (!state.currentCourse) {
+        return 0;
+    }
+
+    return state.currentCourse.pars
+        .slice(0, state.hole + 1)
+        .reduce((a, b) => a + b, 0);
+}
 function totalVsPar(playerIndex) {
 
     const playedAnyHole =
@@ -244,8 +254,8 @@ function totalVsPar(playerIndex) {
         return "";
     }
 
-    let diff = total(playerIndex) - totalPar();
-
+    let diff = total(playerIndex) - playedPar();
+    
     if (diff === 0) {
         return "E";
     }
