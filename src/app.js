@@ -136,15 +136,12 @@ function createCourse() {
 
 function startRound() {
 
- state.holes = state.currentCourse
-    ? state.currentCourse.holes
-    : 18;
-  state.scores = state.players.map(() =>
-      Array(
-          state.currentCourse
-              ? state.currentCourse.holes
-              : 18
-          ).fill(0) 
+    state.holes = state.currentCourse
+        ? state.currentCourse.pars.length
+        : 18;
+
+    state.scores = state.players.map(() =>
+        Array(state.holes).fill(0)
     );
 
     state.hole = 0;
@@ -378,7 +375,12 @@ function endRound() {
 
     render();
 }
+function renderSetup(app) {
 
+    app.innerHTML = `
+        TEMP
+    `;
+}
 // =========================
 // RENDER
 // =========================
