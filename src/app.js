@@ -255,7 +255,7 @@ function totalVsPar(playerIndex) {
     }
 
     let diff = total(playerIndex) - playedPar();
-    
+
     if (diff === 0) {
         return "E";
     }
@@ -403,7 +403,7 @@ function render() {
 
                     <h3>Select Course</h3>
 
-                    ${state.courses.map((course, i) => `
+${state.courses.map((course, i) => `
 
  <div style="
     display:flex;
@@ -422,13 +422,11 @@ function render() {
     <button
         onclick="removeCourse(${i})"
     >
-        🗑
+      🗑
     </button>
 
-</div>                            ${course.name}
-                        </button>
-
-                    `).join("")}
+</div>
+`).join("")}
 
                     <button
                         class="expand-btn"
