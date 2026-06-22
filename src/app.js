@@ -153,23 +153,6 @@ function startRound() {
     render();
 }
 
-function updateScore(playerIndex, delta) {
-
-    if (!state.scores[playerIndex]) {
-        return;
-    }
-
-    state.scores[playerIndex][state.hole] += delta;
-
-    if (state.scores[playerIndex][state.hole] < 0) {
-        state.scores[playerIndex][state.hole] = 0;
-    }
-
-    save();
-
-    render();
-}
-
 function removePlayer(index) {
 
     if (state.players.length <= 1) {
@@ -207,6 +190,22 @@ function prevHole() {
 
     render();
 }
+function updateScore(playerIndex, delta) {
+
+    if (!state.scores[playerIndex]) {
+        return;
+    }
+
+    state.scores[playerIndex][state.hole] += delta;
+
+    if (state.scores[playerIndex][state.hole] < 0) {
+        state.scores[playerIndex][state.hole] = 0;
+    }
+
+    save();
+
+    render();
+}
 
 // =========================
 // TOTALS
@@ -238,10 +237,22 @@ function playedPar() {
         return 0;
     }
 
-    return state.currentCourse.pars
-        .slice(0, state.hole + 1)
-        .reduce((a, b) => a + b, 0);
+    let total = 0;
+
+    for (let h = 0; h < state.currentCourse.pars.length; h++) {
+
+        let holePlayed = state.scores.some(
+            playerScores => playerScores[h] > 0
+        );
+
+        if (holePlayed) {
+            total += state.currentCourse.pars[h];
+        }
+    }
+
+    return total;
 }
+
 function totalVsPar(playerIndex) {
 
     const playedAnyHole =
@@ -274,7 +285,6 @@ function segmentTotal(playerIndex, start, end) {
         .slice(start, end)
         .reduce((a, b) => a + b, 0);
 }
-
 // =========================
 // SCORE COLORS
 // =========================
@@ -386,6 +396,8 @@ function renderSetup(app) {
 // =========================
 
 function render() {
+
+    console.log("currentCourse =", state.currentCourse);
 
     const app = document.getElementById("app");
 
