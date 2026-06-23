@@ -136,37 +136,17 @@ function createCourse() {
 
 function startRound() {
 
- state.holes = state.currentCourse
-    ? state.currentCourse.holes
-    : 18;
-  state.scores = state.players.map(() =>
-      Array(
-          state.currentCourse
-              ? state.currentCourse.holes
-              : 18
-          ).fill(0) 
+    state.holes = state.currentCourse
+        ? state.currentCourse.pars.length
+        : 18;
+
+    state.scores = state.players.map(() =>
+        Array(state.holes).fill(0)
     );
 
     state.hole = 0;
 
     state.screen = "score";
-
-    save();
-
-    render();
-}
-
-function updateScore(playerIndex, delta) {
-
-    if (!state.scores[playerIndex]) {
-        return;
-    }
-
-    state.scores[playerIndex][state.hole] += delta;
-
-    if (state.scores[playerIndex][state.hole] < 0) {
-        state.scores[playerIndex][state.hole] = 0;
-    }
 
     save();
 
@@ -210,6 +190,22 @@ function prevHole() {
 
     render();
 }
+function updateScore(playerIndex, delta) {
+
+    if (!state.scores[playerIndex]) {
+        return;
+    }
+
+    state.scores[playerIndex][state.hole] += delta;
+
+    if (state.scores[playerIndex][state.hole] < 0) {
+        state.scores[playerIndex][state.hole] = 0;
+    }
+
+    save();
+
+    render();
+}
 
 // =========================
 // TOTALS
@@ -241,10 +237,22 @@ function playedPar() {
         return 0;
     }
 
-    return state.currentCourse.pars
-        .slice(0, state.hole + 1)
-        .reduce((a, b) => a + b, 0);
+    let total = 0;
+
+    for (let h = 0; h < state.currentCourse.pars.length; h++) {
+
+        let holePlayed = state.scores.some(
+            playerScores => playerScores[h] > 0
+        );
+
+        if (holePlayed) {
+            total += state.currentCourse.pars[h];
+        }
+    }
+
+    return total;
 }
+
 function totalVsPar(playerIndex) {
 
     const playedAnyHole =
@@ -255,7 +263,7 @@ function totalVsPar(playerIndex) {
     }
 
     let diff = total(playerIndex) - playedPar();
-    
+
     if (diff === 0) {
         return "E";
     }
@@ -277,7 +285,6 @@ function segmentTotal(playerIndex, start, end) {
         .slice(start, end)
         .reduce((a, b) => a + b, 0);
 }
-
 // =========================
 // SCORE COLORS
 // =========================
@@ -378,12 +385,19 @@ function endRound() {
 
     render();
 }
+function renderSetup(app) {
 
+    app.innerHTML = `
+        TEMP
+    `;
+}
 // =========================
 // RENDER
 // =========================
 
 function render() {
+
+    console.log("currentCourse =", state.currentCourse);
 
     const app = document.getElementById("app");
 
@@ -403,7 +417,7 @@ function render() {
 
                     <h3>Select Course</h3>
 
-                    ${state.courses.map((course, i) => `
+${state.courses.map((course, i) => `
 
  <div style="
     display:flex;
@@ -422,13 +436,11 @@ function render() {
     <button
         onclick="removeCourse(${i})"
     >
-        🗑
+      🗑
     </button>
 
-</div>                            ${course.name}
-                        </button>
-
-                    `).join("")}
+</div>
+`).join("")}
 
                     <button
                         class="expand-btn"
