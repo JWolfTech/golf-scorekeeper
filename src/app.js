@@ -1,15 +1,10 @@
 // =========================
 // GOLF APP V3
 // =========================
-
+//import { save } from "./storage.js";
 
 // SCORECARD TOGGLE
 let showScorecard = false;
-
-// =========================
-// SAVE STATE
-// =========================
-
 function save() {
 
     localStorage.setItem(
@@ -17,7 +12,6 @@ function save() {
         JSON.stringify(state)
     );
 }
-
 // =========================
 // COURSE FUNCTIONS
 // =========================
@@ -35,7 +29,7 @@ function selectCourse(index) {
 
     state.currentCourse = state.courses[index];
 
-    save();
+    save(state);
     render();
 }
 
@@ -55,7 +49,7 @@ function removeCourse(index) {
         state.currentCourse = null;
     }
 
-    save();
+    save(state);
 
     render();
 }
@@ -100,7 +94,7 @@ function createCourse() {
 
     state.currentCourse = course;
 
-    save();
+    save(state);
 
     render();
 }
@@ -122,7 +116,7 @@ function startRound() {
 
     state.screen = "score";
 
-    save();
+    save(state);
 
     render();
 }
@@ -138,7 +132,7 @@ function removePlayer(index) {
 
     state.players.splice(index, 1);
 
-    save();
+    save(state);
 
     render();
 }
@@ -149,7 +143,7 @@ function nextHole() {
         state.hole++;
     }
 
-    save();
+    save(state);
 
     render();
 }
@@ -160,7 +154,7 @@ function prevHole() {
         state.hole--;
     }
 
-    save();
+    save(state);
 
     render();
 }
@@ -176,7 +170,7 @@ function updateScore(playerIndex, delta) {
         state.scores[playerIndex][state.hole] = 0;
     }
 
-    save();
+    save(state);
 
     render();
 }
@@ -334,7 +328,7 @@ function saveCompletedRound() {
 
     state.savedRounds.push(round);
 
-    save();
+    save(state);
 }
 
 // =========================
@@ -355,7 +349,7 @@ function endRound() {
 
     state.currentCourse = null;
 
-    save();
+    save(state);
 
     render();
 }
@@ -442,7 +436,7 @@ ${state.players.map((player, i) => `
         value="${player}"
         onchange="
             state.players[${i}] = this.value;
-            save();
+            save(state);
         "
     >
 
